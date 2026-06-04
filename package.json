@@ -1,0 +1,9 @@
+{
+  "name": "vizitka-russkov",
+  "private": true,
+  "description": "Цифровая визитка риэлтора — Руссков Игорь Валерьевич",
+  "scripts": {
+    "dev": "npx --yes serve . -l 5173",
+    "start": "npm run dev"
+  }
+}
