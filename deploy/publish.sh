@@ -38,7 +38,6 @@ if git push -u origin "$BRANCH"; then
   echo ""
   echo "Готово. Через 1–2 мин:"
   echo "  https://russgrad.github.io/vizitka/"
-  echo "  https://vizitka.ru/  (если DNS и Custom domain настроены)"
   echo ""
   echo "Pages: github.com/RussGrad/vizitka/settings/pages"
 else

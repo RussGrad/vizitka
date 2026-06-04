@@ -1,9 +1,8 @@
-# Домен vizitka.ru → GitHub Pages
+# Домен vizitka.ru (опционально, позже)
 
-В репозитории файл **`CNAME`** с содержимым `vizitka.ru`.
+Сейчас визитка без кастомного домена: **https://russgrad.github.io/vizitka/**
 
-Публичный адрес визитки: **https://vizitka.ru/**  
-Запасной: https://russgrad.github.io/vizitka/
+Чтобы подключить **vizitka.ru**, создайте файл `CNAME` в корне репозитория с одной строкой `vizitka.ru` и настройте DNS ниже.
 
 ---
 
