@@ -2,7 +2,8 @@
 
 Цифровая визитка риэлтора — один `index.html`, без сборки.
 
-**Публичная ссылка:** https://russgrad.github.io/vizitka/
+**Основная ссылка:** https://vizitka.ru/  
+**Запасная:** https://russgrad.github.io/vizitka/
 
 ## Возможности
 
@@ -46,4 +47,4 @@ git push
 | `index.html` | Сайт и данные `data` |
 | `avatar.png` | Фото |
 
-Свой домен (позже): `docs/dns-cname.md`
+DNS для **vizitka.ru**: `docs/dns-cname.md`

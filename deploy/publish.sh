@@ -25,9 +25,11 @@ echo "→ Push в $REMOTE ($BRANCH)…"
 if git push -u origin "$BRANCH" 2>&1; then
   echo ""
   echo "Готово. Через 1–2 мин:"
+  echo "  https://vizitka.ru/"
   echo "  https://russgrad.github.io/vizitka/"
   echo ""
-  echo "Если 404: github.com/RussGrad/vizitka/settings/pages"
+  echo "Домен: docs/dns-cname.md"
+  echo "Pages: github.com/RussGrad/vizitka/settings/pages"
   echo "  Source: Deploy from branch → main → /(root)"
 else
   echo ""

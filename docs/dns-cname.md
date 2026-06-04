@@ -1,57 +1,74 @@
-# DNS для визитки (опционально, позже)
+# Домен vizitka.ru → GitHub Pages
 
-Сейчас визитка доступна по адресу: **https://russgrad.github.io/vizitka/**
+В репозитории файл **`CNAME`** с содержимым `vizitka.ru`.
 
-Ниже — настройка своего домена, когда понадобится (например `vizit.sodeystvie.ru`).
+Публичный адрес визитки: **https://vizitka.ru/**  
+Запасной: https://russgrad.github.io/vizitka/
 
-## 1. Запись в DNS (REG.RU или другой регистратор)
+---
 
-Зона домена: **sodeystvie.ru** (если поддомен вида `что-то.sodeystvie.ru`).
+## 1. DNS у регистратора (зона vizitka.ru)
 
-| Поле | Значение |
-|------|----------|
-| Тип | **CNAME** |
-| Имя / поддомен | `vizit_sodeystvie` |
-| Значение / куда | `russgrad.github.io` |
-| TTL | 3600 (или «по умолчанию») |
+### Корень домена `vizitka.ru` (обязательно)
 
-**Не** указывайте IP вручную — только CNAME на `russgrad.github.io`.
+Четыре записи **A** для хоста `@` (или «корень»):
 
-### REG.RU (пример)
+| Тип | Имя | Значение |
+|-----|-----|----------|
+| A | @ | `185.199.108.153` |
+| A | @ | `185.199.109.153` |
+| A | @ | `185.199.110.153` |
+| A | @ | `185.199.111.153` |
 
-1. [reg.ru](https://www.reg.ru) → **Домены** → **sodeystvie.ru**
-2. **Управление зоной DNS** / **Ресурсные записи**
-3. **Добавить запись** → тип **CNAME**
-4. Subdomain: `vizit_sodeystvie` → Canonical: `russgrad.github.io.`
-5. Сохранить
+Это IP-адреса GitHub Pages (актуальный список: [документация GitHub](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain)).
 
-### Если панель просит «полное имя»
+### www (по желанию)
 
-- Хост: `vizit_sodeystvie.sodeystvie.ru`
-- Указывает на: `russgrad.github.io`
+| Тип | Имя | Значение |
+|-----|-----|----------|
+| CNAME | www | `russgrad.github.io` |
 
-## 2. GitHub (уже частично сделано)
+В GitHub Pages можно добавить `www.vizitka.ru` и включить редирект на `vizitka.ru`.
+
+---
+
+## 2. REG.RU (пример)
+
+1. Домены → **vizitka.ru** → **Управление зоной DNS**
+2. Добавить 4× **A** для `@` (см. таблицу выше)
+3. Добавить **CNAME**: `www` → `russgrad.github.io`
+4. TTL: по умолчанию (3600)
+
+---
+
+## 3. GitHub
 
 1. [github.com/RussGrad/vizitka/settings/pages](https://github.com/RussGrad/vizitka/settings/pages)
-2. **Custom domain:** `vizit_sodeystvie.ru` → **Save**
-3. Дождаться проверки DNS (зелёная галочка)
-4. Включить **Enforce HTTPS** (станет доступно после выпуска сертификата)
+2. **Custom domain:** `vizitka.ru` → **Save**
+3. Дождаться **DNS check successful**
+4. Включить **Enforce HTTPS**
 
-## 3. Проверка (через 5–60 мин, иногда до 24 ч)
+После `git push` с файлом `CNAME` домен подхватится автоматически.
+
+---
+
+## 4. Проверка
 
 ```bash
-dig vizit_sodeystvie.ru CNAME +short
-# ожидается: russgrad.github.io.
-
-curl -sI https://vizit_sodeystvie.ru/ | head -3
+dig vizitka.ru A +short
+dig vizitka.ru AAAA +short
+curl -sI https://vizitka.ru/ | head -5
 ```
 
-В браузере: https://vizit_sodeystvie.ru/
+Распространение DNS: от 15 минут до 24–48 часов.
 
-## Запасной адрес
+---
 
-Пока DNS не обновился: https://russgrad.github.io/vizitka/
+## 5. Деплой
 
-## Важно про имя с подчёркиванием
-
-В DNS подчёркивание в имени хоста **допустимо**, но некоторые браузеры и сертификаты ведут себя капризно. Если домен не откроется или нет HTTPS — заведите поддомен **vizit.sodeystvie.ru** (с точкой), обновите `CNAME` в репозитории и запись CNAME в DNS на `vizit` → `russgrad.github.io`.
+```bash
+cd /Users/an_sodeystvie/BITRIX/projects/vizitka
+git add CNAME docs/dns-cname.md README.md
+git commit -m "Домен vizitka.ru для GitHub Pages"
+git push
+```
